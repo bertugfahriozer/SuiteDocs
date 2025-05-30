@@ -1,0 +1,244 @@
+---
+title: "8.9 Releases"
+weight: 9790
+aliases:
+  - /8.x/admin/releases/8.9/
+---
+
+:toc:
+:toc-title:
+:toclevels: 1
+:icons: font
+:imagesdir: /images/en/8.x/admin/release
+
+== 8.9.0
+
+_Released date_
+
+=== icon:box-open[] Assets
+
+* https://github.com/SuiteCRM/SuiteCRM-Core/releases/tag/v8.9.0[GitHub - Download]
+* link:../../installation-guide/downloading-installing[SuiteCRM 8 Install Guide]
+* link:../../upgrading[SuiteCRM 8 Upgrade Guide]
+
+===  icon:check[] Release Notes
+
+==== icon:email[] Upgrade/Migration Notes - Campaigns & Email Marketing
+
+When upgrading or migrating to SuiteCRM 8.9 from a previous version, Email Marketing Records will be updated as follows:
+
+* Records with status `inactive` will be changed to `draft` (the equivalent status in SuiteCRM 8).
+* A new field `type` will be set to `Legacy` to distinguish migrated records from those created in SuiteCRM 8.
+* Two new fields will be added:
+** `Status` — set to `Sent`
+** `Queueing Status` — set to `Finished`
+
+==== icon:level-up-alt[] Setup Changes
+
+===== New Schedulers entrypoint
+
+A new entrypoint for running schedulers is available as a Symfony command. You can execute it via CLI or set it up as a cron job:
+
+----
+php bin/console schedulers:run
+----
+
+This command runs all schedulers that are due at the time of execution.
+
+To configure a cron job for the web server user (usually `www-data`), use:
+----
+sudo crontab -e -u www-data
+----
+
+Add the following line to the crontab (replace `[path/to/php]` and `[path/to/suite/instance]` as needed):
+
+----
+* * * * * [path/to/php] [path/to/suite/instance]/bin/console {-e [env]} schedulers:run > /dev/null 2>&1
+----
+
+{{% notice note %}}
+Note: `{-e [env]}` is optional and specifies the environment.
+{{% /notice %}}
+
+==== icon:book[] Documentation
+
+We have added new documentation for the redesigned Campaigns Module. See more information link:../../../user/modules/_campaigns/[here.]
+
+==== icon:star[] Enhancements
+
+===== icon:file[] Storage Types
+
+SuiteCRM 8.9 introduces new File and Attachment field types, supporting multiple storage options:
+
+Currently, there are 5 storage types:
+
+* `private_documents` — stored in `uploads/documents`
+* `public_documents` — stored in `public/media-upload/documents`
+* `private_images` — stored in `uploads/images`
+* `public_images` — stored in `public/media-upload/images`
+* `archived_documents` — stored in `uploads/archived`
+
+By default, the Attachment field type uses the `private_documents` storage type, as defined in the field metadata.
+
+External storage services can be mapped to these storage types. Supported services:
+
+* AWS S3
+* Azure Blob Storage
+
+To see more information about configuring external storage services, see link:link[File Storage].
+
+==== icon:cog[] New Schedulers Added
+
+SuiteCRM 8.9 introduces 3 new schedulers:
+
+* **Queue Email Marketing** — Queues Email Marketing Records that are scheduled to be sent.
+* **Send Campaign Emails** — Sends the queued emails for Email Marketing Records.
+* **Clean Up Temporary Files** — Cleans up temporary files.
+
+===== icon:paint-brush[] Email Compose Redesign
+
+image:Email-Compose.png[Email-Compose.png]
+
+The Email Compose window has been redesigned in SuiteCRM 8!
+
+The To, CC, and BCC fields support searching and selecting from SuiteCRM Accounts, Contacts, Leads, Users, or individual email addresses.
+
+Attachments can now be included when sending emails.
+
+You are able to insert an Email Template which, when sending, will parse the variables based on the selected Related To record.
+
+The Body field has been updated to use the squire editor, providing more options for formatting.
+
+You can select an email address from any record in List View, Record View, or Dashlet to open a new compose window pre-addressed to that contact.
+
+image:Email-Compose.gif[Email Compose]
+
+===== icon:paint-brush[] Campaigns - Phase 1
+
+Campaigns and Email Marketing have been redesigned in SuiteCRM 8!
+
+image:8-9-campaigns-overview.gif[Campaigns Overview]
+
+You can see more information about Campaigns link:../../../user/modules/_campaigns/[here.]
+
+===== icon:email[] Outbound Email Default
+
+You can now select a Default Outbound Email Account. This will be used as the pre-selected Outbound Account when composing a Campaign or Email.
+
+For newly created users, the first personal outbound created will automatically be set as their default. This can be updated via
+the "Actions" dropdown on the record.
+
+image:Outbound-Email-Actions-Dropdown.png[Outbound Email Action Dropdown]
+
+===== Multi-Relate
+
+Multi-Relate fields have been added to SuiteCRM 8.
+
+You can now relate multiple associated records at once:
+
+image:Multi-Relate.gif[Multi Relate]
+
+==== icon:bug[] Bug Fixes
+
+* PR: https://github.com/SuiteCRM/SuiteCRM-Core/pull/662[662] - Fix https://github.com/SuiteCRM/SuiteCRM-Core/issues/540[#540] - Two tooltips are displayed for listview icons to log call, schedule meeting, create task, compose email
+* PR: https://github.com/SuiteCRM/SuiteCRM-Core/pull/634[634] - Fix https://github.com/SuiteCRM/SuiteCRM-Core/issues/625[#625] -Opportunities list freeze when change Decimal Symbol and 1000s separator
+* PR: https://github.com/SuiteCRM/SuiteCRM-Core/pull/635[635] - Fix https://github.com/SuiteCRM/SuiteCRM-Core/issues/584[#584] - Difficult to assign user to role when pagination is over top of buttons
+* PR: https://github.com/SuiteCRM/SuiteCRM-Core/pull/636[636] - Fix https://github.com/SuiteCRM/SuiteCRM-Core/issues/575[#575] - Proceed button on installation page only submits user action when clicked outside of text
+* PR: https://github.com/SuiteCRM/SuiteCRM-Core/pull/655[655] - Fix https://github.com/SuiteCRM/SuiteCRM-Core/issues/566[#566] - DisplayLogic of Panel is not working
+* PR: https://github.com/SuiteCRM/SuiteCRM-Core/pull/417[417] - Fix https://github.com/SuiteCRM/SuiteCRM-Core/issues/274[#274], https://github.com/SuiteCRM/SuiteCRM-Core/issues/503[#503] - Call list shows Related to field incorrectly if containing letters with accents
+* PR: https://github.com/SuiteCRM/SuiteCRM-Core/pull/704[704] - Fix https://github.com/SuiteCRM/SuiteCRM-Core/issues/607[#607] - Enable relate field value clearing
+* PR: https://github.com/SuiteCRM/SuiteCRM-Core/pull/698[698] - Fix https://github.com/SuiteCRM/SuiteCRM-Core/issues/678[#678] - Enable checkbox filter retrieval in quick filters
+
+==== icon:code[] Developer improvements
+
+* Four new field types have been introduced:
+** Multi-Relate
+** Multi-Flex-Relate
+** File
+** Attachment
+
+* You can use `initDefaultProcess` to initialize field default values by calling the backend.
+
+* Add `afterActionLogic` to action configurations to execute custom field logic after an action.
+
+* Use `asyncValidators` in field definitions for custom asynchronous validation.
+
+* The new HTML editor is now based on the Squire Editor.
+
+* The back button on record view can now be hidden.
+
+* Navigation options can be configured for the back button.
+
+* Relate fields now support confirmation modals.
+
+* Widgets can be filtered by mode or using the `activeOnFields` setting.
+
+* Added a new field grid modal.
+
+* Added a new banner grid sidebar widget.
+
+* Added a new grid top widget.
+
+* You can now add descriptions on modals.
+
+* Relate fields a can now search on empty with the flag `filterOnEmpty` on the vardef.
+
+* Header and subheader fields can be added to relate fields.
+
+* Unwanted subpanels can now be hidden by adding `'hidden' => true` to the definition of the subpanel.
+
+* Preset criteria can be added to relate fields for searching.
+
+* Criteria for relate fields can be added via the vardefs.
+
+* Added a new Record Modal.
+
+* Field labels can now be hidden by adding `'labelDisplay' => none` via the vardefs.
+
+* Toggle fields visibility via field actions using 'toggle-fields-visibility'.
+
+* Modals can now be minimizable using the `'minimizable' => true` via the definition.
+
+* Dynamic labels can also be used on modals.
+
+* Dynamic classes, icons and labels can be used on buttons.
+
+* You can now redirect to another module after deletion by adding the `redirectModule` inside the action `params`,
+
+* After creating a record from a parent record you can add the option to not redirect back to the parent record after creation with the `redirect => false` flag.
+
+* Dynamic labels can be added to field labels.
+
+* Fields now support "footnotes" this can be added to the field via the definition. This supports "activeOn" Fields to hide/show conditionally.
+
+* Modals can have multiple confirmation messages.
+
+* You can now add a default mapper for fields using the `VardefConfigMapperInterface`.
+
+* Icons can now be added on frontend validation by adding the `icon` flag to the returning `label` configuration.
+
+* Statistic Sidebar widgets can now be collapsible with the `allowCollapse` key.
+
+* Statistic Sidebar widgets can now be hidden with `'display' => true` on the row configuration.
+
+==== Missing Features
+
+- Attachments in campaigns
+
+=== icon:heart[] Community
+
+We would love to have your feedback and input to help make SuiteCRM 8 great for everyone.
+
+_Special thanks to the following members for their contributions and participation in this release!_
+
+{{% ghcontributors gmcodentech vladaman DavidGalicia boglar-gabor-echobase xkrdudrlf nicholascourage wriver4 scicali BastianHammer %}}
+
+If you have found an issue you think we should know about, or have suggestion/feedback, please link:https://github.com/SuiteCRM/SuiteCRM-Core/issues[Submit An Issue].
+
+If you want to get involved and submit a fix, fork the repo and when ready please link:https://github.com/SuiteCRM/SuiteCRM-Core/pulls[Submit A PR] - More detail for developers can be found link:https://docs.suitecrm.com/8.x/developer/installation-guide/[here].
+
+Please https://suitecrm.com/releases/[visit the official website] to find the appropriate upgrade package.
+
+To report any security issues please follow our Security Process and send them directly to us via email security@suitecrm.com
+
+'''
