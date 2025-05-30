@@ -172,6 +172,28 @@ See more information about trackers link:../_campaigns/#_tracker_urls[here].
 it will only send it to one record, and the other will be blocked.
 |===
 
+*Subject*
+
+This will be the subject of the Email Marketing Record that's sent out.
+
+*Body*
+
+This will be the content of the Email Marketing Record that's sent out.
+
+*Body: Toolbar*
+
+image:Body-Toolbar.png[Body Toolbar]
+
+Hovering over each button will tell you the function of the button (i.e "Bold", "Italic"...)
+
+Aside from standard editor buttons there is also:
+
+[cols="20,80"]
+|===
+|*image:Unsubscribe-Icon.png[Unsubscribe,width=75]*| This will inject an unsubscribe link to the email body.
+|*image:Code-Icon.png[Code, width=75]*| This will change the editor to a monaco editor - a html field.
+|===
+
 == Tracker Urls
 
 Tracker URLs can be used to insert a link to your organization's website or direct link to a new product that you have launched, for example.
@@ -267,6 +289,11 @@ This will show the interval for three schedulers related to Campaign Emails.
 |*Queue Campaign Emails*| How often will Campaigns Emails be added in batches to the queue.
 |*Run Nightly Process Bounced Campaign Emails*| How often will there be a check for bounced campaign emails.
 |===
+
+{{% notice note %}}
+Emails that have been scheduler to send will show in the respective targets activity subpanel.
+{{% /notice %}}
+
 
 ==== Inbound Email
 
