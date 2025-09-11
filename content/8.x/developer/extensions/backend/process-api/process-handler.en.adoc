@@ -448,7 +448,7 @@ The following are some examples of how to set the feedback for the response.
         $process->setMessages([]);
 ----
 
-**Success with no message**
+**Success with a message**
 [source,php]
 ----
         $process->setStatus('success');

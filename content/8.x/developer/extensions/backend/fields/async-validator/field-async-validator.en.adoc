@@ -61,7 +61,7 @@ As a best practice extension backend code should be added to `extensions/<your-e
 . Create the folder `extensions/defaultExt/modules/Accounts/LegacyHandler/Validation/Validators/`
 .. This is a best practice not a hard requirement
 .. As long as you add under the `extensions/<your-ext>/backend` or `extensions/<your-ext>/modules` it should work.
-. Within that folder create the `BillingStreetAsyncValidator.php`, i.e. `extensions/defaultExt/modules/Accounts/LegacyHandler/Validation/Validators/PhoneAsyncValidator.php`
+. Within that folder create the `PhoneAsyncValidator.php`, i.e. `extensions/defaultExt/modules/Accounts/LegacyHandler/Validation/Validators/PhoneAsyncValidator.php`
 .. If you are not using the recommended path, make sure that the `namespace` follows the one you are using
 .. On our example the namespace is `namespace App\Extension\defaultExt\modules\Accounts\LegacyHandler\Validation\Validators;`
 . On `PhoneAsyncValidator.php`, add the code on the snippet on link:./#_2_3_async_validator_implementation[2.2 Async Validator implementation] section
