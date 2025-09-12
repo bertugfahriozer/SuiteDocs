@@ -68,6 +68,29 @@ To define an attachment field in your vardefs:
 | Maximum allowed file size in bytes.
 | No
 
+| `breakpoint`
+| Number of attachments before a "Show More" link is displayed in the UI.
+| No
+
+| `maxPerRow`
+| Maximum number of attachments to display per row in the UI.
+| No
+
+| `popoverMaxTextLength`
+| Maximum file name length in the popover before truncation.
+| No
+
+| `popoverMinWidth`
+| Minimum width of each attachment inside the popover.
+| No
+
+| `maxTextWidth`
+| Maximum file name length before truncation.
+| No
+
+| `minWidth`
+| Minimum width of each attachment.
+| No
 |===
 
 === Declaring Storage Types
