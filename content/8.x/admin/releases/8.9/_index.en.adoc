@@ -60,9 +60,24 @@ Add the following line to the crontab (replace `[path/to/php]` and `[path/to/sui
 Note: `{-e [env]}` is optional and specifies the environment.
 {{% /notice %}}
 
+To see more information about Schedulers, see link:../../administration-panel/schedulers[here.]
+
 ==== icon:book[] Documentation
 
-We have added new documentation for the redesigned Campaigns Module. See more information link:../../../user/modules/_campaigns/[here.]
+With all the new changes in SuiteCRM 8.9 comes alot of more documentation!
+
+Documentation has been added for:
+
+* link:../../../user/modules/campaigns/[Campaigns]
+* link:../../administration-panel/schedulers[Schedulers]
+* link:../../../developer/extensions/backend/fields/async-validator/field-async-validator[Field Async Validator]
+* link:../../../developer/extensions/backend/fields/init-default-process/field-init-default-process[Field Init Default Process]
+* link:../../configuration/file-storage/8.9.0-attachment-field-type[Attachment Field Type]
+* link:../../configuration/file-storage/8.9.0-file-field-type[File Field Type]
+* link:../../configuration/file-storage/8.9.0-file-storage-configuration[File Storage Configuration Reference]
+* link:../../configuration/file-storage/8.9.0-aws-how-to-guide[How to configure AWS S3 Storage]
+* link:../../configuration/file-storage/8.9.0-azure-how-to-guide[How to configure Azure Blob Storage]
+* link:../../configuration/file-storage/8.9.0-media-object-lifecycle[Lifecycle of Media Objects]
 
 ==== icon:star[] Enhancements
 
@@ -85,7 +100,7 @@ External storage services can be mapped to these storage types. Supported servic
 * AWS S3
 * Azure Blob Storage
 
-To see more information about configuring external storage services, see link:link[File Storage].
+To see more information about configuring external storage services, see the documentation section above.
 
 ==== icon:cog[] New Schedulers Added
 
@@ -101,7 +116,8 @@ image:Email-Compose.png[Email-Compose.png]
 
 The Email Compose window has been redesigned in SuiteCRM 8!
 
-The To, CC, and BCC fields support searching and selecting from SuiteCRM Accounts, Contacts, Leads, Users, or individual email addresses.
+The To, CC, and BCC fields support searching and selecting from SuiteCRM Accounts, Contacts, Leads, Users, or individual email addresses
+using the new Multi-Flex-Relate field.
 
 Attachments can now be included when sending emails.
 
