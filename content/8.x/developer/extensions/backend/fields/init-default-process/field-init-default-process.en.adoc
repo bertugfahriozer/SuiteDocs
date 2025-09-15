@@ -3,7 +3,7 @@ title: "Adding an init Default Process to a Field"
 weight: 20
 ---
 
-:imagesdir: /images/en/8.x/developer/extensions/backed-end/field/
+:imagesdir: /images/en/8.x/developer/extensions/backend/field/init-default-process/
 
 == 1. Introduction
 
@@ -23,7 +23,7 @@ In the following example we are going to add one to the `Accounts` module field 
 . Create a new field in custom extensions for Accounts module:
 .. Example:  `public/legacy/custom/Extension/modules/Accounts/Ext/Vardefs/annual_revenue.php`
 . Copy the `phone_office` definition from `public/legacy/include/SugarObjects/templates/company/vardefs.php`
-. Replace the `logic` entry to the  `phone_office` definition with the code on the snippet below.
+. Add the `initDefaultProcess` entry to the `phone_office` definition with the code on the snippet below.
 ** Re-set permissions if needed (will depend on your setup)
 . Run `Repair and Rebuild` on Admin menu
 

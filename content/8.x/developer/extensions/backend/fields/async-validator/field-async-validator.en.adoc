@@ -3,7 +3,7 @@ title: "Adding an Async Validator to a Field"
 weight: 20
 ---
 
-:imagesdir: /images/en/8.x/developer/extensions/backed-end/field/
+:imagesdir: /images/en/8.x/developer/extensions/backend/field/async-validator/
 
 == 1. Introduction
 
@@ -13,7 +13,7 @@ This guide will show you how to create an async validator for a field.
 
 == 2. Async Validator Metadata Definition
 
-The first thing to define is the `asyncValidators` entry in the metadata. This is where we will define the key for our async validator and any parameters it may need.
+The first thing to define is the `asyncValidators` entry in the metadata.
 
 The configuration for the logic can be added to the `vardefs.php` or the `detailviewdefs.php`.
 
