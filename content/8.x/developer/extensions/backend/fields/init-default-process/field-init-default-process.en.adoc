@@ -1,5 +1,5 @@
 ---
-title: "Adding an init Default Process to a Field"
+title: "Backend driven default value initialization"
 weight: 20
 ---
 
@@ -7,7 +7,7 @@ weight: 20
 
 == 1. Introduction
 
-In SuiteCRM 8, you can add `initDefaultProcess` to fields definitions.
+In SuiteCRM 8, you can define process handlers to run when setting the default value for a field. This is achieved with the `initDefaultProcess` option on field definitions.
 This calls the backend on initialization of the field to get the default value.
 
 == 2. initDefaultProcess Metadata Definition
