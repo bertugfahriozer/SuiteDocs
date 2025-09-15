@@ -3,7 +3,7 @@ Title: Attachment Field Configuration - 8.9.0+
 weight: 20
 ---
 
-:imagesdir: /images/en/user
+:imagesdir: /images/en/8.x/user/features
 
 {{% notice info %}}
 The following documentation is for SuiteCRM Version 8.9.0+
@@ -12,6 +12,8 @@ The following documentation is for SuiteCRM Version 8.9.0+
 == Intro
 
 Attachment fields allow you to associate uploaded files (such as documents or images) with your entities. These fields are managed by the media uploader system and support various storage backends.
+
+image:attchments-field-detail.png[Attachments Field Detail]
 
 === How Attachment Fields Work
 
@@ -23,29 +25,47 @@ To understand how the media uploader and storage system works, please refer to t
 
 It is also important to know the link:../8.9-media-object-lifecycle[lifecycle of media objects] to understand how files are managed in the system.
 
+By default, the Attachment field type uses the `private_documents` storage type, as defined in the field metadata.
+
 === Configuration Example
 
 To define an attachment field in your vardefs:
 
+Minimal configuration:
 [source,php]
 ----
 'attachments' => [
     'name' => 'attachments',
     'vname' => 'LBL_ATTACHMENTS',
     'type' => 'attachment',
-    'len' => '255',
+    'source' => 'non-db',
+    'reportable' => false,
+    'importable' => false,
+    'metadata' => [
+        'storage_type' => 'private-documents', // Required!
+    ],
+],
+----
+
+Full configuration with attachment specific options:
+[source,php]
+----
+'attachments' => [
+    'name' => 'attachments',
+    'vname' => 'LBL_ATTACHMENTS',
+    'type' => 'attachment',
     'source' => 'non-db',
     'reportable' => false,
     'importable' => false,
     'metadata' => [
         'storage_type' => 'private-documents', // Required!
         'upload_maxsize' => 10000000, // Optional, defaults to global config
-        'breakpoint' => 3,
-        'maxPerRow' => 3,
-        'popoverMaxTextLength' => '200px',
-        'popoverMinWidth' => '315px',
-        'maxTextWidth' => '150px',
-        'minWidth' => '185px',
+        'breakpoint' => 1, // Optional
+        'maxPerRow' => 3, // Optional
+        'popoverMaxTextLength' => '200px', // Optional
+        'popoverMinWidth' => '315px', // Optional
+        'maxTextWidth' => '150px', // Optional
+        'minWidth' => '185px', // Optional
     ],
 ],
 ----
