@@ -3,7 +3,7 @@ Title: File Field Configuration - 8.9.0+
 weight: 10
 ---
 
-:imagesdir: /images/en/user
+:imagesdir: /images/en/8.x/user/features
 
 {{% notice info %}}
 The following documentation is for SuiteCRM Version 8.9.0+
@@ -12,6 +12,8 @@ The following documentation is for SuiteCRM Version 8.9.0+
 == Intro
 
 File fields allow you to associate uploaded files (such as documents or images) with your entities. These fields are managed by the media uploader system and support various storage backends.
+
+image:file-upload-field-detail.png[File Field Detail]
 
 === How File Fields Work
 
@@ -27,13 +29,29 @@ It is also important to know the link:../8.9-media-object-lifecycle[lifecycle of
 
 To define an file field in your vardefs:
 
+Minimal configuration:
 [source,php]
 ----
 'file' => [
     'name' => 'file',
     'vname' => 'LBL_FILE',
     'type' => 'file',
-    'len' => '255',
+    'source' => 'non-db',
+    'reportable' => false,
+    'importable' => false,
+    'metadata' => [
+        'storage_type' => 'private-documents', // Required!
+    ],
+],
+----
+
+Full configuration with max upload size option:
+[source,php]
+----
+'file' => [
+    'name' => 'file',
+    'vname' => 'LBL_FILE',
+    'type' => 'file',
     'source' => 'non-db',
     'reportable' => false,
     'importable' => false,
