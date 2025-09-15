@@ -1,5 +1,5 @@
 ---
-title: "Adding an Async Validator to a Field"
+title: "Adding Backend driven Save Validator to a Field"
 weight: 20
 ---
 
@@ -7,7 +7,7 @@ weight: 20
 
 == 1. Introduction
 
-In SuiteCRM 8, you can add asynchronous validators to fields in your modules. This allows you to perform custom validation logic that runs asynchronously on save.
+In SuiteCRM 8, you can add save validators that run on the backend (a.k.a. asynchronous validators) to fields in your modules. This allows you to perform custom validation logic that runs asynchronously on save.
 
 This guide will show you how to create an async validator for a field.
 
