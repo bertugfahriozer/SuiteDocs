@@ -37,6 +37,10 @@ When upgrading or migrating to SuiteCRM 8.9 from a previous version, Email Marke
 
 ===== New Schedulers entrypoint
 
+{{% notice note %}}
+Note: This new entrypoint replaces the legacy cron.
+{{% /notice %}}
+
 A new entrypoint for running schedulers is available as a Symfony command. You can execute it via CLI or set it up as a cron job:
 
 ----
@@ -68,7 +72,7 @@ With all the new changes in SuiteCRM 8.9 comes alot of more documentation!
 
 Documentation has been added for:
 
-* link:../../../user/modules/campaigns/[Campaigns]
+* link:../../../user/modules/_campaigns/[Campaigns]
 * link:../../administration-panel/schedulers[Schedulers]
 * link:../../../developer/extensions/backend/fields/async-validator/field-async-validator[Field Async Validator]
 * link:../../../developer/extensions/backend/fields/init-default-process/field-init-default-process[Field Init Default Process]
@@ -78,12 +82,18 @@ Documentation has been added for:
 * link:../../configuration/file-storage/8.9.0-aws-how-to-guide[How to configure AWS S3 Storage]
 * link:../../configuration/file-storage/8.9.0-azure-how-to-guide[How to configure Azure Blob Storage]
 * link:../../configuration/file-storage/8.9.0-media-object-lifecycle[Lifecycle of Media Objects]
+* link:../../../developer/extensions/backend/fields/footnotes/field-footnotes[Field Footnotes]`
 
 ==== icon:star[] Enhancements
 
-===== icon:file[] Storage Types
+===== icon:file[] New File Upload Field Types & Storage Options
 
-SuiteCRM 8.9 introduces new File and Attachment field types, supporting multiple storage options:
+SuiteCRM 8.9 introduces two new field types for handling file uploads: `file` and `attachment`.
+
+* **file** - For single file uploads.
+* **attachment** - For multiple file uploads.
+
+These field types leverage the media uploader system, allowing files to be stored in various backends, including local storage and external services like AWS S3 and Azure Blob Storage.
 
 Currently, there are 5 storage types:
 
@@ -95,12 +105,11 @@ Currently, there are 5 storage types:
 
 By default, the Attachment field type uses the `private_documents` storage type, as defined in the field metadata.
 
-External storage services can be mapped to these storage types. Supported services:
-
-* AWS S3
-* Azure Blob Storage
-
 To see more information about configuring external storage services, see the documentation section above.
+
+{{% notice note %}}
+Note: The file upload does not yet support uploading Documents or Notes.
+{{% /notice %}}
 
 ==== icon:cog[] New Schedulers Added
 
@@ -110,7 +119,7 @@ SuiteCRM 8.9 introduces 3 new schedulers:
 * **Send Campaign Emails** — Sends the queued emails for Email Marketing Records.
 * **Clean Up Temporary Files** — Cleans up temporary files.
 
-===== icon:paint-brush[] Email Compose Redesign
+===== icon:paint-brush[] Email Compose Redesign - Phase 1
 
 image:Email-Compose.png[Email-Compose.png]
 
@@ -167,79 +176,61 @@ image:Multi-Relate.gif[Multi Relate]
 
 ==== icon:code[] Developer improvements
 
-* Four new field types have been introduced:
-** Multi-Relate
-** Multi-Flex-Relate
-** File
-** Attachment
+* Fields:
+** Four new field types have been introduced:
+*** Multi-Relate
+*** Multi-Flex-Relate
+*** File
+*** Attachment
+** The new HTML editor is now based on the Squire Editor.
+** You can use `initDefaultProcess` to initialize field default values by calling the backend.
+** Add `afterActionLogic` to action configurations to execute custom field logic after an action.
+** Use `asyncValidators` in field definitions for custom asynchronous validation.
+** Relate fields now support confirmation modals.
+** Relate fields a can now search on empty with the flag `filterOnEmpty` on the vardef. This will search for results without inputting any values.
+** Header and subheader fields can be added to relate fields.
+** Preset criteria can be added to relate fields for searching.
+** Criteria for relate fields can be added via the vardefs.
+** Field labels can now be hidden by adding `'labelDisplay' => none` via the vardefs.
+** Toggle fields visibility via field actions using 'toggle-fields-visibility'.
+** Dynamic labels can be added to field labels.
+** Fields now support "footnotes" this can be added to the field via the definition. This supports "activeOn" Fields to hide/show conditionally.
+** You can now add a default mapper for fields using the `VardefConfigMapperInterface`.
 
-* You can use `initDefaultProcess` to initialize field default values by calling the backend.
+* Record:
+** You can now redirect to another module after deletion by adding the `redirectModule` inside the action `params`.
+** After creating a record from a parent record you can add the option to not redirect back to the parent record after creation with the `redirect => false` flag.
+** The back button on record view can now be hidden.
+** Navigation options can be configured for the back button.
 
-* Add `afterActionLogic` to action configurations to execute custom field logic after an action.
+* Grids and Widgets:
+** Widgets can be filtered by mode or using the `activeOnFields` setting.
+** Added a new banner grid sidebar widget.
+** Added a new grid top widget.
+** Statistic Sidebar widgets can now be collapsible with the `allowCollapse` key.
+** Statistic Sidebar widgets can now be hidden with `'display' => true` on the row configuration.
 
-* Use `asyncValidators` in field definitions for custom asynchronous validation.
+* Modals:
+** Added a new Record Modal.
+** Added a new field grid modal.
+** You can now add descriptions on modals.
+** Modals can now be minimizable using the `'minimizable' => true` via the definition.
+** Dynamic labels can also be used on modals.
+** Modals can have multiple confirmation messages.
 
-* The new HTML editor is now based on the Squire Editor.
+* Subpanels:
+** Unwanted subpanels can now be hidden by adding `'hidden' => true` to the definition of the subpanel.
 
-* The back button on record view can now be hidden.
+* Buttons:
+** Dynamic classes, icons and labels can be used on buttons.
 
-* Navigation options can be configured for the back button.
-
-* Relate fields now support confirmation modals.
-
-* Widgets can be filtered by mode or using the `activeOnFields` setting.
-
-* Added a new field grid modal.
-
-* Added a new banner grid sidebar widget.
-
-* Added a new grid top widget.
-
-* You can now add descriptions on modals.
-
-* Relate fields a can now search on empty with the flag `filterOnEmpty` on the vardef.
-
-* Header and subheader fields can be added to relate fields.
-
-* Unwanted subpanels can now be hidden by adding `'hidden' => true` to the definition of the subpanel.
-
-* Preset criteria can be added to relate fields for searching.
-
-* Criteria for relate fields can be added via the vardefs.
-
-* Added a new Record Modal.
-
-* Field labels can now be hidden by adding `'labelDisplay' => none` via the vardefs.
-
-* Toggle fields visibility via field actions using 'toggle-fields-visibility'.
-
-* Modals can now be minimizable using the `'minimizable' => true` via the definition.
-
-* Dynamic labels can also be used on modals.
-
-* Dynamic classes, icons and labels can be used on buttons.
-
-* You can now redirect to another module after deletion by adding the `redirectModule` inside the action `params`,
-
-* After creating a record from a parent record you can add the option to not redirect back to the parent record after creation with the `redirect => false` flag.
-
-* Dynamic labels can be added to field labels.
-
-* Fields now support "footnotes" this can be added to the field via the definition. This supports "activeOn" Fields to hide/show conditionally.
-
-* Modals can have multiple confirmation messages.
-
-* You can now add a default mapper for fields using the `VardefConfigMapperInterface`.
-
-* Icons can now be added on frontend validation by adding the `icon` flag to the returning `label` configuration.
-
-* Statistic Sidebar widgets can now be collapsible with the `allowCollapse` key.
-
-* Statistic Sidebar widgets can now be hidden with `'display' => true` on the row configuration.
+* Icons:
+** Icons can now be added on frontend validation by adding the `icon` flag to the returning `label` configuration.
 
 ==== Missing Features
 
-- Attachments in campaigns
+- Attachments in Campaigns
+- Drafts in Email Compose
 
 === icon:heart[] Community
 
