@@ -66,58 +66,7 @@ Note: `{-e [env]}` is optional and specifies the environment.
 
 To see more information about Schedulers, see link:../../administration-panel/schedulers[here.]
 
-==== icon:book[] Documentation
-
-With all the new changes in SuiteCRM 8.9 comes alot of more documentation!
-
-Documentation has been added for:
-
-* link:../../../user/modules/_campaigns/[Campaigns]
-* link:../../administration-panel/schedulers[Schedulers]
-* link:../../../developer/extensions/backend/fields/async-validator/field-async-validator[Field Async Validator]
-* link:../../../developer/extensions/backend/fields/init-default-process/field-init-default-process[Field Init Default Process]
-* link:../../configuration/file-storage/8.9.0-attachment-field-type[Attachment Field Type]
-* link:../../configuration/file-storage/8.9.0-file-field-type[File Field Type]
-* link:../../configuration/file-storage/8.9.0-file-storage-configuration[File Storage Configuration Reference]
-* link:../../configuration/file-storage/8.9.0-aws-how-to-guide[How to configure AWS S3 Storage]
-* link:../../configuration/file-storage/8.9.0-azure-how-to-guide[How to configure Azure Blob Storage]
-* link:../../configuration/file-storage/8.9.0-media-object-lifecycle[Lifecycle of Media Objects]
-* link:../../../developer/extensions/backend/fields/footnotes/field-footnotes[Field Footnotes]`
-
 ==== icon:star[] Enhancements
-
-===== icon:file[] New File Upload Field Types & Storage Options
-
-SuiteCRM 8.9 introduces two new field types for handling file uploads: `file` and `attachment`.
-
-* **file** - For single file uploads.
-* **attachment** - For multiple file uploads.
-
-These field types leverage the media uploader system, allowing files to be stored in various backends, including local storage and external services like AWS S3 and Azure Blob Storage.
-
-Currently, there are 5 storage types:
-
-* `private_documents` — stored in `uploads/documents`
-* `public_documents` — stored in `public/media-upload/documents`
-* `private_images` — stored in `uploads/images`
-* `public_images` — stored in `public/media-upload/images`
-* `archived_documents` — stored in `uploads/archived`
-
-By default, the Attachment field type uses the `private_documents` storage type, as defined in the field metadata.
-
-To see more information about configuring external storage services, see the documentation section above.
-
-{{% notice note %}}
-Note: The file upload does not yet support uploading Documents or Notes.
-{{% /notice %}}
-
-==== icon:cog[] New Schedulers Added
-
-SuiteCRM 8.9 introduces 3 new schedulers:
-
-* **Queue Email Marketing** — Queues Email Marketing Records that are scheduled to be sent.
-* **Send Campaign Emails** — Sends the queued emails for Email Marketing Records.
-* **Clean Up Temporary Files** — Cleans up temporary files.
 
 ===== icon:paint-brush[] Email Compose Redesign - Phase 1
 
@@ -125,10 +74,11 @@ image:Email-Compose.png[Email-Compose.png]
 
 The Email Compose window has been redesigned in SuiteCRM 8!
 
-The To, CC, and BCC fields support searching and selecting from SuiteCRM Accounts, Contacts, Leads, Users, or individual email addresses
-using the new Multi-Flex-Relate field.
+This release introduces the first phase of the redesign, with more features to come in future releases.
 
-Attachments can now be included when sending emails.
+The To, CC, and BCC fields support searching and selecting from SuiteCRM Accounts, Contacts, Leads, Users, or individual email addresses using the new Multi-Flex-Relate field.
+
+Attachments have been implemented using the new storage system
 
 You are able to insert an Email Template which, when sending, will parse the variables based on the selected Related To record.
 
@@ -142,9 +92,75 @@ image:Email-Compose.gif[Email Compose]
 
 Campaigns and Email Marketing have been redesigned in SuiteCRM 8!
 
-image:8-9-campaigns-overview.gif[Campaigns Overview]
+This release introduces the first phase of the redesign, with more features to come in future releases.
 
 You can see more information about Campaigns link:../../../user/modules/_campaigns/[here.]
+
+image:8-9-campaigns-overview.gif[Campaigns Overview]
+
+
+===== icon:file[] New File Upload Field Types - Phase 1
+
+SuiteCRM 8.9 introduces two new field types for handling file uploads: `file` and `attachment`.
+
+{{% notice note %}}
+Note: Documents and Notes do not yet use the new fields or the new storage system. The migration of these modules to SuiteCRM 8 version will be provided in a future release.
+{{% /notice %}}
+
+**file** - For single file uploads.
+
+* For more information see link:../../configuration/file-storage/8.9.0-file-field-type[File Field Type] documentation.
+
+image:file-upload-field-detail.png[File Field Detail]
+
+**attachment** - For multiple file uploads.
+
+* For more information see link:../../configuration/file-storage/8.9.0-attachment-field-type[Attachment Field Type] documentation.
+
+image:attchments-field-detail.png[Attachments Field Detail]
+
+
+===== icon:file[] New Media Storage System - Phase 1
+
+These field types leverage the media uploader system, which allows files to be stored in various backends: local storage, AWS S3 or Azure Blob Storage.
+
+A new concept of "storage types" has been introduced to define different storage backends and locations for different use cases. Each storage type can be linked to a different storage system, e.g. it is possible to have `private_documents` pointing to Azure blobs while `private_images` points to AWS S3. This should give system admins flexibility in how and where files are stored.
+
+Currently, there are 5 storage types:
+
+* `private_documents` — stored in `uploads/documents`
+* `public_documents` — stored in `public/media-upload/documents`
+* `private_images` — stored in `uploads/images`
+* `public_images` — stored in `public/media-upload/images`
+* `archived_documents` — stored in `uploads/archived`
+
+To see more information about configuring external storage services, see link:../../configuration/file-storage[File Storage Configuration] documentation.
+
+{{% notice note %}}
+Note: This release does not yet include a migration path for old files stored in the legacy `upload` directory. A migration path will be provided in a future release.
+{{% /notice %}}
+
+
+===== Multi-Relate
+
+Multi-Relate fields have been added to SuiteCRM 8.
+
+You can now relate multiple associated records at once:
+
+{{% notice note %}}
+Note: For the moment this field is not available in the Studio. A future release will include Studio support.
+{{% /notice %}}
+
+
+image:Multi-Relate.gif[Multi Relate]
+
+==== icon:cog[] New Schedulers Added
+
+SuiteCRM 8.9 introduces 3 new schedulers:
+
+* **Queue Email Marketing** — Queues Email Marketing Records that are scheduled to be sent.
+* **Send Campaign Emails** — Sends the queued emails for Email Marketing Records.
+* **Clean Up Temporary Files** — Cleans up temporary files.
 
 ===== icon:email[] Outbound Email Default
 
@@ -155,13 +171,6 @@ the "Actions" dropdown on the record.
 
 image:Outbound-Email-Actions-Dropdown.png[Outbound Email Action Dropdown]
 
-===== Multi-Relate
-
-Multi-Relate fields have been added to SuiteCRM 8.
-
-You can now relate multiple associated records at once:
-
-image:Multi-Relate.gif[Multi Relate]
 
 ==== icon:bug[] Bug Fixes
 
@@ -174,18 +183,39 @@ image:Multi-Relate.gif[Multi Relate]
 * PR: https://github.com/SuiteCRM/SuiteCRM-Core/pull/704[704] - Fix https://github.com/SuiteCRM/SuiteCRM-Core/issues/607[#607] - Enable relate field value clearing
 * PR: https://github.com/SuiteCRM/SuiteCRM-Core/pull/698[698] - Fix https://github.com/SuiteCRM/SuiteCRM-Core/issues/678[#678] - Enable checkbox filter retrieval in quick filters
 
+==== icon:book[] Documentation
+
+With all the new changes in SuiteCRM 8.9 comes alot of more documentation!
+
+Documentation has been added for:
+
+* link:../../../user/modules/_campaigns/[Campaigns]
+* link:../../administration-panel/schedulers[Schedulers]
+* link:../../../developer/extensions/backend/fields/async-validator/field-async-validator[Backend driven Save Validators]
+* link:../../../developer/extensions/backend/fields/init-default-process/field-init-default-process[Backend driven default value initialization]
+* link:../../../developer/extensions/backend/fields/footnotes/field-footnotes[Field Footnotes]
+* File upload fields and storage
+** link:../../configuration/file-storage/8.9.0-attachment-field-type[Attachment Field Type]
+** link:../../configuration/file-storage/8.9.0-file-field-type[File Field Type]
+** link:../../configuration/file-storage/8.9.0-file-storage-configuration[File Storage Configuration Reference]
+** link:../../configuration/file-storage/8.9.0-aws-how-to-guide[How to configure AWS S3 Storage]
+** link:../../configuration/file-storage/8.9.0-azure-how-to-guide[How to configure Azure Blob Storage]
+** link:../../configuration/file-storage/8.9.0-media-object-lifecycle[Lifecycle of Media Objects]
+
+
 ==== icon:code[] Developer improvements
 
 * Fields:
 ** Four new field types have been introduced:
-*** Multi-Relate
-*** Multi-Flex-Relate
 *** File
 *** Attachment
+*** Multi-Relate
+*** Multi-Flex-Relate
+**** Only available on edit mode
 ** The new HTML editor is now based on the Squire Editor.
-** You can use `initDefaultProcess` to initialize field default values by calling the backend.
+** Backend driven default value initialization - You can use `initDefaultProcess` to initialize field default values by calling the backend.
 ** Add `afterActionLogic` to action configurations to execute custom field logic after an action.
-** Use `asyncValidators` in field definitions for custom asynchronous validation.
+** Backend driven Save Validators - Use `asyncValidators` in field definitions for custom asynchronous validation.
 ** Relate fields now support confirmation modals.
 ** Relate fields a can now search on empty with the flag `filterOnEmpty` on the vardef. This will search for results without inputting any values.
 ** Header and subheader fields can be added to relate fields.
