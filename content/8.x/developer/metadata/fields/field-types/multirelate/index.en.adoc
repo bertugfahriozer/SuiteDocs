@@ -79,9 +79,7 @@ A `multirelate` field supports the following configuration options:
 | `filter`
 | Array. Static or dynamic filters to apply to the related records.
 
-  - See the link:../../../field-options/filter/filter[Filter field definition option] for details.
-
-
+  - See the link:../../field-options/filter[Filter option] documentation for details.
 
 | No
 

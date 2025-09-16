@@ -1,5 +1,5 @@
 ---
-title: "Filter field definition option"
+title: "Filter option"
 weight: 20
 ---
 

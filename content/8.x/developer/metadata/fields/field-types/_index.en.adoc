@@ -1,5 +1,5 @@
 ---
-title: "Extending Field Definitions"
+title: "Field Types"
 weight: 30
 ---
 

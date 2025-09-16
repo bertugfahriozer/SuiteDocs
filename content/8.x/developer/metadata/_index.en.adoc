@@ -1,5 +1,5 @@
 ---
-title: "Extending Field Definitions"
+title: "Metadata"
 weight: 30
 ---
 
