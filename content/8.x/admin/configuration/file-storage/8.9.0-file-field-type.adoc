@@ -23,7 +23,7 @@ To use a file field, you must specify the `storage_type` in the field's `metadat
 
 To understand how the media uploader and storage system works, please refer to the link:../8.9.0-file-storage-configuration/[File Storage Configuration Reference].
 
-It is also important to know the link:../8.9-media-object-lifecycle[lifecycle of media objects] to understand how files are managed in the system.
+It is also important to know the link:../8.9.0-media-object-lifecycle[lifecycle of media objects] to understand how files are managed in the system.
 
 === Configuration Example
 

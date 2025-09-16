@@ -246,7 +246,7 @@ Documentation has been added for:
 ** You can now add descriptions on modals.
 ** Modals can now be minimizable using the `'minimizable' => true` via the definition.
 ** Dynamic labels can also be used on modals.
-** Modals can have multiple confirmation messages.
+** Modals can have multiple confirmation messages using `confirmationMessages`.
 
 * Subpanels:
 ** Unwanted subpanels can now be hidden by adding `'hidden' => true` to the definition of the subpanel.
