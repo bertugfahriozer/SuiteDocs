@@ -109,13 +109,13 @@ Note: Documents and Notes do not yet use the new fields or the new storage syste
 
 **file** - For single file uploads.
 
-* For more information see link:../../configuration/file-storage/8.9.0-file-field-type[File Field Type] documentation.
+* For more information see link:../../configuration/file-storage/file-field-type[File Field Type] documentation.
 
 image:file-upload-field-detail.png[File Field Detail]
 
 **attachment** - For multiple file uploads.
 
-* For more information see link:../../configuration/file-storage/8.9.0-attachment-field-type[Attachment Field Type] documentation.
+* For more information see link:../../configuration/file-storage/attachment-field-type[Attachment Field Type] documentation.
 
 image:attchments-field-detail.png[Attachments Field Detail]
 
@@ -195,12 +195,12 @@ Documentation has been added for:
 * link:../../../developer/extensions/backend/fields/init-default-process/field-init-default-process[Backend driven default value initialization]
 * link:../../../developer/extensions/backend/fields/footnotes/field-footnotes[Field Footnotes]
 * File upload fields and storage
-** link:../../configuration/file-storage/8.9.0-attachment-field-type[Attachment Field Type]
-** link:../../configuration/file-storage/8.9.0-file-field-type[File Field Type]
-** link:../../configuration/file-storage/8.9.0-file-storage-configuration[File Storage Configuration Reference]
-** link:../../configuration/file-storage/8.9.0-aws-how-to-guide[How to configure AWS S3 Storage]
-** link:../../configuration/file-storage/8.9.0-azure-how-to-guide[How to configure Azure Blob Storage]
-** link:../../configuration/file-storage/8.9.0-media-object-lifecycle[Lifecycle of Media Objects]
+** link:../../configuration/file-storage/attachment-field-type[Attachment Field Type]
+** link:../../configuration/file-storage/file-field-type[File Field Type]
+** link:../../configuration/file-storage/file-storage-configuration[File Storage Configuration Reference]
+** link:../../configuration/file-storage/aws-how-to-guide[How to configure AWS S3 Storage]
+** link:../../configuration/file-storage/azure-how-to-guide[How to configure Azure Blob Storage]
+** link:../../configuration/file-storage/media-object-lifecycle[Lifecycle of Media Objects]
 
 
 ==== icon:code[] Developer improvements
@@ -214,7 +214,6 @@ Documentation has been added for:
 **** Only available on edit mode
 ** The new HTML editor is now based on the Squire Editor.
 ** Backend driven default value initialization - You can use `initDefaultProcess` to initialize field default values by calling the backend.
-** Add `afterActionLogic` to action configurations to execute custom field logic after an action.
 ** Backend driven Save Validators - Use `asyncValidators` in field definitions for custom asynchronous validation.
 ** Relate fields now support confirmation modals.
 ** Relate fields a can now search on empty with the flag `filterOnEmpty` on the vardef. This will search for results without inputting any values.

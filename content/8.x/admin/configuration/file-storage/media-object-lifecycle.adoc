@@ -1,5 +1,5 @@
 ---
-Title: Media Object Lifecycle - 8.9.0+
+Title: Media Object Lifecycle
 weight: 60
 ---
 

@@ -1,5 +1,5 @@
 ---
-Title: How to store to Azure Blob Storage - 8.9.0+
+Title: How to store to Azure Blob Storage
 weight: 30
 ---
 

@@ -1,5 +1,5 @@
 ---
-Title: File Field Configuration - 8.9.0+
+Title: File Field Configuration
 weight: 10
 ---
 
@@ -21,9 +21,9 @@ When a field is configured as type `file`, it enables file upload and management
 
 To use a file field, you must specify the `storage_type` in the field's `metadata` configuration. This tells the system which storage backend to use for the uploaded files.
 
-To understand how the media uploader and storage system works, please refer to the link:../8.9.0-file-storage-configuration/[File Storage Configuration Reference].
+To understand how the media uploader and storage system works, please refer to the link:../file-storage-configuration/[File Storage Configuration Reference].
 
-It is also important to know the link:../8.9.0-media-object-lifecycle[lifecycle of media objects] to understand how files are managed in the system.
+It is also important to know the link:../media-object-lifecycle[lifecycle of media objects] to understand how files are managed in the system.
 
 === Configuration Example
 
@@ -73,7 +73,7 @@ Full configuration with max upload size option:
 | Yes
 
 | `storage_type`
-| The storage backend to use for this field. Must match a configured storage (e.g., `private-documents`, `public-images`). See the link:../8.9.0-file-storage-configuration/[File Storage Configuration Reference].
+| The storage backend to use for this field. Must match a configured storage (e.g., `private-documents`, `public-images`). See the link:../file-storage-configuration/[File Storage Configuration Reference].
 | Yes
 
 | `upload_maxsize`
@@ -84,7 +84,7 @@ Full configuration with max upload size option:
 
 === Declaring Storage Types
 
-The `storage_type` must correspond to a storage defined in your media configuration (see link:../8.9.0-file-storage-configuration/[File Storage Configuration Reference]). Example storage types include:
+The `storage_type` must correspond to a storage defined in your media configuration (see link:../file-storage-configuration/[File Storage Configuration Reference]). Example storage types include:
 
 - `private-documents`
 - `archived-documents`

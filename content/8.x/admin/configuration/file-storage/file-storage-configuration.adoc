@@ -1,5 +1,5 @@
 ---
-Title: File storage configuration reference - 8.9.0+
+Title: File storage configuration reference
 weight: 50
 ---
 
