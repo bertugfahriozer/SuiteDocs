@@ -13,7 +13,7 @@ aliases:
 
 == 8.9.0
 
-_Released date_
+_Released 17 September 2025_
 
 === icon:box-open[] Assets
 
@@ -37,10 +37,6 @@ When upgrading or migrating to SuiteCRM 8.9 from a previous version, Email Marke
 
 ===== New Schedulers entrypoint
 
-{{% notice note %}}
-Note: This new entrypoint replaces the legacy cron.
-{{% /notice %}}
-
 A new entrypoint for running schedulers is available as a Symfony command. You can execute it via CLI or set it up as a cron job:
 
 ----
@@ -49,27 +45,39 @@ php bin/console schedulers:run
 
 To see more information about Schedulers, and setting up the new configuration see link:../../administration-panel/schedulers[here.]
 
+ℹ️ This new entrypoint replaces the legacy cron and needs to be enabled in order to run new symfony side schedulers.
+
+==== icon:book[] Documentation
+
+With all the new changes in SuiteCRM 8.9 comes a lot of more documentation!
+
+Documentation has been added for:
+
+* *Features:*
+** link:../../../user/modules/_campaigns/[Campaigns]
+* *Setup:*
+** link:../../administration-panel/schedulers[Schedulers]
+* *File Storage:*
+** link:../../configuration/file-storage/file-storage-configuration[File Storage Configuration Reference]
+** link:../../configuration/file-storage/aws-how-to-guide[How to configure AWS S3 Storage]
+** link:../../configuration/file-storage/azure-how-to-guide[How to configure Azure Blob Storage]
+** link:../../configuration/file-storage/media-object-lifecycle[Lifecycle of Media Objects]
+* *Field Options:*
+** link:../../../developer/metadata/fields/field-options/async-validator[Async Validators option]
+** link:../../../developer/metadata/fields/field-options/init-default-process[Init Default Process option]
+** link:../../../developer/metadata/fields/field-options/footnotes[Footnotes option]
+** link:../../../developer/metadata/fields/field-options/filter[Filter option]
+* *Field types:*
+** link:../../../developer/metadata/fields/field-types/attachment[Attachment Field Type]
+** link:../../../developer/metadata/fields/field-types/file[File Field Type]
+** link:../../../developer/metadata/fields/field-types/multirelate[Multi Relate Field Type]
+* *Extensions:*
+** link:../../../developer/extensions/backend/fields/vardef-config-mapper/[Vardef Config Mapper]
+
+
 ==== icon:star[] Enhancements
 
-===== icon:paint-brush[] Email Compose Redesign - Phase 1
-
-The Email Compose window has been redesigned in SuiteCRM 8!
-
-This release introduces the first phase of the redesign, with more features to come in future releases.
-
-The To, CC, and BCC fields support searching and selecting from SuiteCRM Accounts, Contacts, Leads, Users, or individual email addresses using the new Multi-Flex-Relate field.
-
-Attachments have been implemented using the new storage system
-
-You are able to insert an Email Template which, when sending, will parse the variables based on the selected Related To record.
-
-The Body field has been updated to use the squire editor, providing more options for formatting.
-
-You can select an email address from any record in List View, Record View, or Dashlet to open a new compose window pre-addressed to that contact.
-
-image:Email-Compose.gif[Email Compose]
-
-===== icon:paint-brush[] Campaigns - Phase 1
+===== icon:paint-brush[] Campaigns
 
 Campaigns and Email Marketing have been redesigned in SuiteCRM 8!
 
@@ -79,25 +87,48 @@ You can see more information about Campaigns link:../../../user/modules/_campaig
 
 image:8-9-campaigns-overview.gif[Campaigns Overview]
 
-===== icon:file[] New File Upload Field Types - Phase 1
+===== icon:paint-brush[] Email Compose Redesign
+
+The Email Compose modal has been redesigned in SuiteCRM 8!
+
+This release introduces a brand new and redesigned compose modal that aims to provide a better user experience, including:
+
+* A configurable compose modal that can be collapsed and can remain open while navigating the app.
+* To, CC, and BCC fields that support searching and selecting from SuiteCRM Accounts, Contacts, Leads, Users, or individual email addresses using the new Multi-Flex-Relate field.
+* Attachments implemented using the new storage system.
+* Ability to insert an Email Template which, when sending, will parse the variables based on the selected Related To record.
+* The Body field now uses the lightweight Squire editor, offering consistent, rich text editing tailored for emails.
+* Email address links in Suite 8 views open a new compose modal pre-addressed to that contact.
+
+Even more is planned for the compose modal, the following releases will bring more features such as: saving drafts and attaching existing documents.
+
+image:Email-Compose.gif[Email Compose]
+
+
+
+===== icon:file[] New File and Attachment Field Types
 
 SuiteCRM 8.9 introduces two new field types for handling file uploads: `file` and `attachment`.
 
+**File type**
+
+* Designed for uploading files to a field. This field type is ideal for scenarios where only one file needs to be associated with a record, such as uploading a profile picture, a single contract, or a receipt. The uploaded file is stored using the new media storage system, supporting various backends like local storage, AWS S3, or Azure Blob Storage.
+* For more information see link:../../../developer/metadata/fields/field-types/file[File Field Type] documentation.
+
+**Attachment type**
+
+* Built for attaching multiple items to a record. Unlike the `file` field, the `attachment` field, by default, always allows users to associate several files at once. Additionally, in future releases we plan to add support not only for file uploads but also linking existing documents from the Documents module, and potentially other types of attachments. This will make it suitable for use cases like attaching supporting documents, reference materials, or related files to a record.
+* For more information see link:../../../developer/metadata/fields/field-types/attachment[Attachment Field Type] documentation.
+
+ℹ️ Documents and Notes do not yet use the new fields or the new storage system. The migration of these modules to SuiteCRM 8 version will be provided in a future release.
+
+image:notes-attachments-field-detail.png[Notes and Attachments Field Detail]
+
+===== icon:file[] New Media Storage System
+
 {{% notice note %}}
-Note: Documents and Notes do not yet use the new fields or the new storage system. The migration of these modules to SuiteCRM 8 version will be provided in a future release.
+This release does not yet include a migration path for old files stored in the legacy `upload` directory. A migration path will be provided in a future release.
 {{% /notice %}}
-
-**file** - For single file uploads.
-
-* For more information see link:../../configuration/file-storage/file-field-type[File Field Type] documentation.
-
-**attachment** - For multiple file uploads.
-
-* For more information see link:../../configuration/file-storage/attachment-field-type[Attachment Field Type] documentation.
-
-image:file-upload-field-detail.png[File Field Detail]
-
-===== icon:file[] New Media Storage System - Phase 1
 
 These field types leverage the media uploader system, which allows files to be stored in various backends: local storage, AWS S3 or Azure Blob Storage.
 
@@ -113,20 +144,16 @@ Currently, there are 5 storage types:
 
 To see more information about configuring external storage services, see link:../../configuration/file-storage[File Storage Configuration] documentation.
 
-{{% notice note %}}
-Note: This release does not yet include a migration path for old files stored in the legacy `upload` directory. A migration path will be provided in a future release.
-{{% /notice %}}
 
 
 ===== Multi-Relate
 
+
 Multi-Relate fields have been added to SuiteCRM 8.
 
-You can now relate multiple associated records at once:
+You can now relate multiple associated records at once (see below). For more information see link:../../../developer/metadata/fields/field-types/multirelate/[Multi Relate] documentation.
 
-{{% notice note %}}
-Note: For the moment this field is not available in the Studio. A future release will include Studio support.
-{{% /notice %}}
+ℹ️ For the moment this field is not available in the Studio. A future release will include Studio support.
 
 image:Multi-Relate.gif[Multi Relate]
 
@@ -137,6 +164,7 @@ SuiteCRM 8.9 introduces 3 new schedulers:
 * **Queue Email Marketing** — Queues Email Marketing Records that are scheduled to be sent.
 * **Send Campaign Emails** — Sends the queued emails for Email Marketing Records.
 * **Clean Up Temporary Files** — Cleans up temporary files.
+* **Prune Database scheduler** — Prune Database scheduler has been moved to symfony side and now also removes media objects from the new storage system.
 
 ===== icon:email[] Outbound Email Default
 
@@ -156,29 +184,9 @@ the "Actions" dropdown on the record.
 * PR: https://github.com/SuiteCRM/SuiteCRM-Core/pull/704[704] - Fix https://github.com/SuiteCRM/SuiteCRM-Core/issues/607[#607] - Enable relate field value clearing
 * PR: https://github.com/SuiteCRM/SuiteCRM-Core/pull/698[698] - Fix https://github.com/SuiteCRM/SuiteCRM-Core/issues/678[#678] - Enable checkbox filter retrieval in quick filters
 
-==== icon:book[] Documentation
-
-With all the new changes in SuiteCRM 8.9 comes alot of more documentation!
-
-Documentation has been added for:
-
-* link:../../../user/modules/_campaigns/[Campaigns]
-* link:../../administration-panel/schedulers[Schedulers]
-* link:../../../developer/extensions/backend/fields/async-validator/field-async-validator[Backend driven Save Validators]
-* link:../../../developer/extensions/backend/fields/init-default-process/field-init-default-process[Backend driven default value initialization]
-* link:../../../developer/extensions/backend/fields/footnotes/field-footnotes[Field Footnotes]
-* File upload fields and storage
-** link:../../configuration/file-storage/attachment-field-type[Attachment Field Type]
-** link:../../configuration/file-storage/file-field-type[File Field Type]
-** link:../../configuration/file-storage/file-storage-configuration[File Storage Configuration Reference]
-** link:../../configuration/file-storage/aws-how-to-guide[How to configure AWS S3 Storage]
-** link:../../configuration/file-storage/azure-how-to-guide[How to configure Azure Blob Storage]
-** link:../../configuration/file-storage/media-object-lifecycle[Lifecycle of Media Objects]
-
-
 ==== icon:code[] Developer improvements
 
-* Fields:
+* *Fields:*
 ** Four new field types have been introduced:
 *** File
 *** Attachment
@@ -188,31 +196,32 @@ Documentation has been added for:
 ** The new HTML editor is now based on the Squire Editor.
 ** Backend driven default value initialization - You can use `initDefaultProcess` to initialize field default values by calling the backend.
 ** Backend driven Save Validators - Use `asyncValidators` in field definitions for custom asynchronous validation.
-** Relate fields now support confirmation modals.
-** Relate fields a can now search on empty with the flag `filterOnEmpty` on the vardef. This will search for results without inputting any values.
-** Header and subheader fields can be added to relate fields.
-** Preset criteria can be added to relate fields for searching.
-** Criteria for relate fields can be added via the vardefs.
-** Field labels can now be hidden by adding `'labelDisplay' => none` via the vardefs.
+** Relate and Multi-Relate fields:
+*** Relate fields now support confirmation modals.
+*** Relate fields can now search on empty with the flag `filterOnEmpty` on the vardef. This will search for results without inputting any values.
+*** Header and subheader fields can be added to relate fields.
+*** Preset criteria can be added to relate fields for searching.
+*** Criteria for relate fields can be added via the vardefs.
+** Field labels can now be hidden on record view by adding `'labelDisplay' => none` via the vardefs.
 ** Toggle fields visibility via field actions using 'toggle-fields-visibility'.
 ** Dynamic labels can be added to field labels.
 ** Fields now support "footnotes" this can be added to the field via the definition. This supports "activeOn" Fields to hide/show conditionally.
 ** You can now add a default mapper for fields using the `VardefConfigMapperInterface`.
 
-* Record:
+* *Record:*
 ** You can now redirect to another module after deletion by adding the `redirectModule` inside the action `params`.
 ** After creating a record from a parent record you can add the option to not redirect back to the parent record after creation with the `redirect => false` flag.
 ** The back button on record view can now be hidden.
 ** Navigation options can be configured for the back button.
 
-* Grids and Widgets:
+* *Grids and Widgets:*
 ** Widgets can be filtered by mode or using the `activeOnFields` setting.
 ** Added a new banner grid sidebar widget.
 ** Added a new grid top widget.
 ** Statistic Sidebar widgets can now be collapsible with the `allowCollapse` key.
 ** Statistic Sidebar widgets can now be hidden with `'display' => true` on the row configuration.
 
-* Modals:
+* *Modals:*
 ** Added a new Record Modal.
 ** Added a new field grid modal.
 ** You can now add descriptions on modals.
@@ -220,19 +229,14 @@ Documentation has been added for:
 ** Dynamic labels can also be used on modals.
 ** Modals can have multiple confirmation messages using `confirmationMessages`.
 
-* Subpanels:
+* *Subpanels:*
 ** Unwanted subpanels can now be hidden by adding `'hidden' => true` to the definition of the subpanel.
 
-* Buttons:
+* *Buttons:*
 ** Dynamic classes, icons and labels can be used on buttons.
 
-* Icons:
+* *Icons:*
 ** Icons can now be added on frontend validation by adding the `icon` flag to the returning `label` configuration.
-
-==== Missing Features
-
-- Attachments in Campaigns
-- Drafts in Email Compose
 
 === icon:heart[] Community
 
