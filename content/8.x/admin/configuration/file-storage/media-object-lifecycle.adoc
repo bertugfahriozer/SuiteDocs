@@ -35,7 +35,7 @@ This section describes the lifecycle of media objects (files) uploaded via the s
 
 1. When a parent record is soft deleted, all linked media objects are also marked as deleted.
 
-==== Deletion of Parent Record
+==== File Replacement
 
 1. When a file is replaced with a new upload, the old media object is immediately deleted and the corresponding file removed, it is not marked as deleted.
 
@@ -64,19 +64,6 @@ Default::
 ----
 every minute
 ----
-
-Example:
-[source,php]
-----
-//public/legacy/config_override.php or can also be added to config.php
-
-<?php
-
-...
-
-$sugar_config['max_temp_file_lifetime'] = '24 HOURS';
-----
-
 
 === max_temp_file_lifetime
 
