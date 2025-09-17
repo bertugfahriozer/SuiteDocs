@@ -35,7 +35,7 @@ on Suppression Lists see link:../../../../user/core-modules//target-lists/#_targ
 |===
 
 {{% notice note %}}
-Please note that the Target Lists you select here will be the *only* Target Lists shown / selectable on the Marketing Record
+Target Lists you select here will be the *only* Target Lists shown / selectable on the Marketing Record
 {{% /notice %}}
 
 === Budget
@@ -221,8 +221,8 @@ image:Unsubscribe-Icon.png[Unsubscribe Icon]
 
 This will add an unsubscribe link to the email.
 
-{{% notice warning %}}
-Please note: An unsubscribe link is required on both a marketing and survey type Email Marketing record.
+{{% notice info %}}
+An unsubscribe link is required on both a marketing and survey type Email Marketing record.
 {{% /notice %}}
 
 == Email Marketing Record Actions
@@ -257,15 +257,15 @@ This will Schedule the Email Marketing Record to start queuing / sending at the 
 
 Scheduling also deletes test entries.
 
-{{% notice warning %}}
-Please note: The Record *CANNOT* be edited / updated after scheduling.
+{{% notice info %}}
+The Record *CANNOT* be edited / updated after scheduling.
 {{% /notice %}}
 
 === Unschedule
 
 Once the record has been scheduled, This action will set the record to Draft and allow the user to make further changes.
 
-{{% notice warning %}}
+{{% notice info %}}
 The Record can only be unscheduled before the sending process has begun. After this stage the record must be "Aborted" to stop the process.
 {{% /notice %}}
 
