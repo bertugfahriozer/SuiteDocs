@@ -86,9 +86,10 @@ The following schedulers are available in SuiteCRM:
 
 [cols="20,80"]
 |===
-|*Clean Up Temporary Files*| Cleans up temporary files uploaded through and attachment fields.
+|*Clean Up Temporary Files*| Cleans up temporary files uploaded through file and attachment fields.
 |*Queue Campaign Emails*| Queues Email Marketing Records that are scheduled to be sent.
 |*Send Campaign Emails*| Sends the queued emails for Email Marketing Records.
+|*Prune Database scheduler*| Prune Database scheduler has been moved to symfony side and now also removes media objects from the new storage system.
 |===
 
 
